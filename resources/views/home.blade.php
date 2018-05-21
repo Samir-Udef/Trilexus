@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <img src="{{ $avatarUrl}}" alt="Facebook Avatar" ><br>
+                    <img src="{{ Auth::user()->getAvatarUrl() }}" alt="Avatar" ><br>
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -28,4 +29,21 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    
+
+    public function getAvatarUrl()
+    {
+        switch (Auth::user()->provider) {
+            case 'google':
+            $url = str_replace('sz=50', 'sz=150', Auth::user()->avatar) ;
+            return $url;
+            break;
+            case 'facebook':
+            return 'https://graph.facebook.com/'. Auth::user()->provider_id.'/picture?width=150&height=150';
+            break;
+        }
+
+    }
+
 }
