@@ -8,6 +8,15 @@
                 <div class="panel-heading">Login</div>
 
                 <div class="panel-body">
+                    <a href="{{ route('social.oauth', 'facebook') }}" class="btn btn-primary btn-block">
+                            Login with Facebook
+                        </a>
+
+                        <a href="{{ route('social.oauth', 'google') }}" class="btn btn-danger btn-block">
+                            Login with Google
+                        </a>
+                        <hr>
+                        <p class="text-center">Login with Email</p>
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
@@ -57,6 +66,9 @@
 
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
+                                </a>
+                                <a href="{{ route('register') }}" class="btn btn-link">
+                                    Register with Email
                                 </a>
                             </div>
                         </div>
