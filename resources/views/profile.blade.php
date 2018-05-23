@@ -12,7 +12,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <img src="{{ Auth::user()->getAvatarUrl() }}" alt="Avatar" ><br>
+                    <img style="width: 150px; height:150px;" height="150" width="150" src="{{ Auth::user()->getAvatarUrl() }}" alt="Avatar" ><br>
                 </div>
             </div>
         </div>

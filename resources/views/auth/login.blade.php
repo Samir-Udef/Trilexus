@@ -17,6 +17,16 @@
                         </a>
                         <hr>
                         <p class="text-center">Login with Email</p>
+			@if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                       @endif
+                       @if (session('warning'))
+                           <div class="alert alert-warning">
+                               {{ session('warning') }}
+                           </div>
+		       @endif
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 

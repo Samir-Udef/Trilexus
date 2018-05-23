@@ -31,6 +31,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function verifyUser()
+    {
+	    return $this->hasOne('App\VerifyUser');
+    }
     
 
     public function getAvatarUrl()
@@ -43,6 +47,8 @@ class User extends Authenticatable
             case 'facebook':
             return 'https://graph.facebook.com/'. Auth::user()->provider_id.'/picture?width=150&height=150';
             break;
+            default:
+            return '/images/avatars/blank-profile-picture.png';
         }
 
     }

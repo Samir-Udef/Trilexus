@@ -25,3 +25,6 @@ Route::get('/profile', 'UserController@profile')->name('user.profile');
 Route::get('auth/social', 'Auth\SocialAuthController@show')->name('social.login');
 Route::get('oauth/{driver}', 'Auth\SocialAuthController@redirectToProvider')->name('social.oauth');
 Route::get('oauth/{driver}/callback', 'Auth\SocialAuthController@handleProviderCallback')->name('social.callback');
+
+//Verify User Email
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
