@@ -112,7 +112,7 @@ class UserController extends Controller
 		    // $output = Slim::saveFile($data, $name, 'tmp/', false);
 
 		    // Default call for saving the output data
-		    $output = Slim::saveFile($data, $name);
+		    $output = Slim::saveFile($data, Auth::user()->id, 'images/avatars/');
 		}
 
 		// if we've received input data (do the same as above but for input data)
