@@ -19,7 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'UserController@profile')->name('user.profile');
-
+Route::post('/profile', 'UserController@profile')->name('user.profilepost');
+Route::post('/slimAsync', 'UserController@slimAsync')->name('user.slimAsync');
 
 // Social Auth
 Route::get('auth/social', 'Auth\SocialAuthController@show')->name('social.login');
@@ -28,3 +29,4 @@ Route::get('oauth/{driver}/callback', 'Auth\SocialAuthController@handleProviderC
 
 //Verify User Email
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
+
