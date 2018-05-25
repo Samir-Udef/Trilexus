@@ -2,11 +2,6 @@
 
 namespace App\Classes;
 
-abstract class SlimStatus {
-    const FAILURE = 'failure';
-    const SUCCESS = 'success';
-}
-
 class Slim {
 
     public static function getImages($inputName = 'slim') {

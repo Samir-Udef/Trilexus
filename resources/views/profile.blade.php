@@ -13,6 +13,7 @@
              data-ratio="1:1"
              data-size="150,150"
              data-max-file-size="2"
+             data-force-type="png"
              data-will-request="handleRequest">
             <img class="" src="{{ Auth::user()->getAvatarUrl() }}" alt=""/>
             <input type="file" name="slim[]"/>

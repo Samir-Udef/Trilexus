@@ -17,7 +17,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password',
-	'avatar', 'provider_id', 'provider',
+	'avatar', 'uselocalavatar', 'provider_id', 'provider',
 	'access_token', 'infotext', 'gender',
     'birthdate'
     ];
@@ -48,6 +48,9 @@ class User extends Authenticatable
             return 'https://graph.facebook.com/'. Auth::user()->provider_id.'/picture?width=150&height=150';
             break;
             default:
+            if (Auth::user()->uselocalavatar) {
+                return Auth::user()->avatar;
+            }
             return '/images/avatars/blank-profile-picture.png';
         }
 

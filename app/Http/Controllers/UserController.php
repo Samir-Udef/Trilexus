@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Classes\Slim;
 use App\Classes\SlimStatus;
+use App\User;
 use Auth;
 
 class UserController extends Controller
@@ -112,7 +113,8 @@ class UserController extends Controller
 		    // $output = Slim::saveFile($data, $name, 'tmp/', false);
 
 		    // Default call for saving the output data
-		    $output = Slim::saveFile($data, Auth::user()->id, 'images/avatars/');
+		    $output = Slim::saveFile($data, $name, 'images/avatars/');
+	
 		}
 
 		// if we've received input data (do the same as above but for input data)
@@ -155,12 +157,17 @@ class UserController extends Controller
 		        'file' => $input['name'],
 		        'path' => $input['path']
 		    );
-
 		}
 		else {
 		    $response['file'] = isset($output) ? $output['name'] : $input['name'];
 		    $response['path'] = isset($output) ? $output['path'] : $input['path'];
 		}
+
+			//Update user avatar 
+		    $userAvatarUpdate = User::find( Auth::user()->id );
+		    $userAvatarUpdate->avatar = $output['path'];
+		    $userAvatarUpdate->uselocalavatar = 1;
+		    $userAvatarUpdate->save();
 
 		// Return results as JSON String
 		Slim::outputJSON($response);
