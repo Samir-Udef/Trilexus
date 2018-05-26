@@ -10,7 +10,7 @@ use Auth;
 
 class UserController extends Controller
 {
-    //    
+	//    
     public function __construct()
     {
         $this->middleware('auth');
@@ -18,8 +18,32 @@ class UserController extends Controller
 
     public function profile()
     {
-        return view('profile');
+        return view('profile')->with('user', User::find(Auth::user()->id));
     }
+
+    public function updateProfile(Request $request) {
+    	$input = request()->validate([
+    		'displayname' => 'required',
+    		'dateofbirth' => 'required'
+    		],[
+    		'displayname.required' => 'Anzeigename wird benötigt!',
+    		'dateofbirth.required' => 'Geburtstdatum wird benötigt!'
+    		]);
+
+    	$user = User::find( Auth::user()->id );
+    	$user->name = $request->get('displayname');
+    	$user->infotext = $request->get('infotext');
+    	$user->birthdate = $request->get('dateofbirth');
+    	$user->gender = $request->get('gender');
+    	$user->save();
+
+    	return view('profile')->with('user', User::find(Auth::user()->id));
+    }
+
+
+
+
+
 
 	public function slimAsync() {
 		// Uncomment if you want to allow posts from other domains
@@ -165,7 +189,7 @@ class UserController extends Controller
 
 			//Update user avatar 
 		    $userAvatarUpdate = User::find( Auth::user()->id );
-		    $userAvatarUpdate->avatar = $output['path'];
+		    $userAvatarUpdate->localavatar = $output['path'];
 		    $userAvatarUpdate->uselocalavatar = 1;
 		    $userAvatarUpdate->save();
 

@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'UserController@profile')->name('user.profile');
-Route::post('/profile', 'UserController@profile')->name('user.profilepost');
+Route::post('/profile', 'UserController@updateProfile')->name('user.updateProfile');
 Route::post('/slimAsync', 'UserController@slimAsync')->name('user.slimAsync');
 
 // Social Auth

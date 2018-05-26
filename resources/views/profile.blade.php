@@ -28,7 +28,8 @@ function handleRequest(xhr) {
 }
 
 </script>
-<form class="form-horizontal" method="POST" action="{{ route('user.profile') }}">    
+<form class="form-horizontal" method="POST" action="{{ route('user.updateProfile') }}">
+{{ csrf_field() }} 
     <div class="form-group{{ $errors->has('displayname') ? ' has-error' : '' }}">
         <label for="displayname" class="col-md-4 control-label">Anzeigename</label>
         <div class="col-md-6">
@@ -43,15 +44,14 @@ function handleRequest(xhr) {
     <div class="form-group">
         <label for="infotext" class="col-md-4 control-label">Beschreibung</label>
         <div class="col-md-6">
-            <textarea id="infotext" type="infotext" class="form-control" name="infotext" value="Beschreibe dich" rows="5"></textarea>
+            <textarea id="infotext" type="infotext" class="form-control" name="infotext" value="{{ $user->infotext }}" rows="5">{{ $user->infotext }}</textarea>
         </div>
     </div>
 
     <div class="form-group{{ $errors->has('dateofbirth') ? ' has-error' : '' }}">
         <label for="dateofbirth" class="col-md-4 control-label">Geburtsdatum</label>
         <div class="col-md-6">
-            <input id="dateofbirth" type="date" class="form-control" name="dateofbirth" required>
-
+            <input id="dateofbirth" type="date" class="form-control" name="dateofbirth" value="{{ $user->birthdate }}" required>
             @if ($errors->has('dateofbirth'))
                 <span class="help-block">
                     <strong>{{ $errors->first('dateofbirth') }}</strong>
@@ -62,11 +62,11 @@ function handleRequest(xhr) {
     <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
             <label for="gender" class="col-md-4 control-label">Geschlecht</label>
             <div class="col-md-6">
-            <select class="form-control" id="gender">
-                <option></option>
-                <option>weiblich</option>
-                <option>männlich</option>
-                <option>inter/divers</option>
+            <select class="form-control" name="gender" id="gender">
+                <option value="not_specified" {{ ( $user->gender == 'not_specified' ) ? ' selected' : '' }}>keine Angabe</option>
+                <option value="female" {{ ( $user->gender == 'female' ) ? ' selected' : '' }}>weiblich</option>
+                <option value="male" {{ ( $user->gender == 'male' ) ? ' selected' : '' }}>männlich</option>
+                <option value="intersex" {{ ( $user->gender == 'intersex' ) ? ' selected' : '' }}>inter/divers</option>
             </select>
         </div>
     </div>

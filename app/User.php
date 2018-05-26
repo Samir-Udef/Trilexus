@@ -39,6 +39,9 @@ class User extends Authenticatable
 
     public function getAvatarUrl()
     {
+        if (Auth::user()->uselocalavatar) {
+                return Auth::user()->localavatar;
+            }
         switch (Auth::user()->provider) {
             case 'google':
             $url = str_replace('sz=50', 'sz=150', Auth::user()->avatar) ;
@@ -48,9 +51,6 @@ class User extends Authenticatable
             return 'https://graph.facebook.com/'. Auth::user()->provider_id.'/picture?width=150&height=150';
             break;
             default:
-            if (Auth::user()->uselocalavatar) {
-                return Auth::user()->avatar;
-            }
             return '/images/avatars/blank-profile-picture.png';
         }
 
